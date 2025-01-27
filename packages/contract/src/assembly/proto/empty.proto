@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package empty;
+
+import "koinos/options.proto"; 
+
+message str {
+   string value = 1;
+}
+
+message uint64 {
+   uint64 value = 1;
+}
+
+message get_vault_args {
+   bytes owner = 1 [(koinos.btype) = ADDRESS];
+}
+
+message vaultbalances {
+   uint64 eth = 1 [jstype = JS_STRING];
+   uint64 btc = 2 [jstype = JS_STRING];
+   uint64 kas = 3 [jstype = JS_STRING];
+   uint64 kusdsilver = 4 [jstype = JS_STRING];
+}
+
+message deposit_args {
+   bytes account = 1 [(koinos.btype) = ADDRESS];
+   uint32 collateral = 2;
+   uint64 amount = 3 [jstype = JS_STRING];
+   uint32 fee = 4;
+   bytes fee_address = 5 [(koinos.btype) = ADDRESS];
+}
+
+message withdraw_args {
+   bytes account = 1 [(koinos.btype) = ADDRESS];
+   uint32 collateral = 2;
+   uint64 amount = 3 [jstype = JS_STRING];
+}
+
+message mint_args {
+   bytes account = 1 [(koinos.btype) = ADDRESS];
+   uint64 amount = 2 [jstype = JS_STRING];
+}
+
+message repay_args {
+   bytes account = 1 [(koinos.btype) = ADDRESS];
+   uint64 amount = 2 [jstype = JS_STRING];
+}
+
+message liquidate_args {
+   bytes account = 1 [(koinos.btype) = ADDRESS];
+   bytes vault = 2 [(koinos.btype) = ADDRESS];
+}
+
+
+
+message ratio_args {
+   
+}
+
+message ratio_result {
+   string k_last = 1;
+   uint64 token_a = 2 [jstype = JS_STRING];
+   uint64 token_b = 3 [jstype = JS_STRING];
+   uint64 block_time = 4 [jstype = JS_STRING];
+}
