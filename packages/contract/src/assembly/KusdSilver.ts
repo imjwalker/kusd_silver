@@ -13,9 +13,9 @@ const VAULTS_SPACE_ID = 5;
 
 // TESTNET CONTRACTS
 // Random token contracts (placeholders). Freely mint tokens (in range of uint64) 
-const ethContract = new Base(Base58.decode("17mY5nkRwW4cpruxmavBaTMfiV3PUC8mG7")); // Stable test
-const btcContract = new Base(Base58.decode("1PMyipr6DmecFezR3Z6wLheNznK76yuSat")); // third stable
-const kasContract = new Base(Base58.decode("1Nu8U85SLvLHimTYLGVH2Qha5uoDuWm6mm")); // fourth stable
+const ethContract = new Base(Base58.decode("17mY5nkRwW4cpruxmavBaTMfiV3PUC8mG7"));
+const btcContract = new Base(Base58.decode("1PMyipr6DmecFezR3Z6wLheNznK76yuSat"));
+const kasContract = new Base(Base58.decode("1Nu8U85SLvLHimTYLGVH2Qha5uoDuWm6mm"));
 
 // KoinDX pool contracts
 const ethUsdt = new Extc(Base58.decode("15EDfz9ZdepDSV1ERoe8LXN9dvT7X7qMk1"));
