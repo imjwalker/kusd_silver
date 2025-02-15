@@ -73,24 +73,26 @@ export namespace empty {
     }
   }
 
-  export class get_vault_args {
-    static encode(message: get_vault_args, writer: Writer): void {
-      const unique_name_owner = message.owner;
-      if (unique_name_owner !== null) {
+  export class ks_protocol_balances {
+    static encode(message: ks_protocol_balances, writer: Writer): void {
+      const unique_name_kvb = message.kvb;
+      for (let i = 0; i < unique_name_kvb.length; ++i) {
         writer.uint32(10);
-        writer.bytes(unique_name_owner);
+        writer.fork();
+        ks_vaultbalances.encode(unique_name_kvb[i], writer);
+        writer.ldelim();
       }
     }
 
-    static decode(reader: Reader, length: i32): get_vault_args {
+    static decode(reader: Reader, length: i32): ks_protocol_balances {
       const end: usize = length < 0 ? reader.end : reader.ptr + length;
-      const message = new get_vault_args();
+      const message = new ks_protocol_balances();
 
       while (reader.ptr < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
           case 1:
-            message.owner = reader.bytes();
+            message.kvb.push(ks_vaultbalances.decode(reader, reader.uint32()));
             break;
 
           default:
@@ -102,16 +104,16 @@ export namespace empty {
       return message;
     }
 
-    owner: Uint8Array | null;
+    kvb: Array<ks_vaultbalances>;
 
-    constructor(owner: Uint8Array | null = null) {
-      this.owner = owner;
+    constructor(kvb: Array<ks_vaultbalances> = []) {
+      this.kvb = kvb;
     }
   }
 
   @unmanaged
-  export class vaultbalances {
-    static encode(message: vaultbalances, writer: Writer): void {
+  export class ks_vaultbalances {
+    static encode(message: ks_vaultbalances, writer: Writer): void {
       if (message.eth != 0) {
         writer.uint32(8);
         writer.uint64(message.eth);
@@ -133,9 +135,9 @@ export namespace empty {
       }
     }
 
-    static decode(reader: Reader, length: i32): vaultbalances {
+    static decode(reader: Reader, length: i32): ks_vaultbalances {
       const end: usize = length < 0 ? reader.end : reader.ptr + length;
-      const message = new vaultbalances();
+      const message = new ks_vaultbalances();
 
       while (reader.ptr < end) {
         const tag = reader.uint32();
@@ -178,8 +180,144 @@ export namespace empty {
     }
   }
 
-  export class deposit_args {
-    static encode(message: deposit_args, writer: Writer): void {
+  export class ks_get_vault_args {
+    static encode(message: ks_get_vault_args, writer: Writer): void {
+      const unique_name_owner = message.owner;
+      if (unique_name_owner !== null) {
+        writer.uint32(10);
+        writer.bytes(unique_name_owner);
+      }
+    }
+
+    static decode(reader: Reader, length: i32): ks_get_vault_args {
+      const end: usize = length < 0 ? reader.end : reader.ptr + length;
+      const message = new ks_get_vault_args();
+
+      while (reader.ptr < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            message.owner = reader.bytes();
+            break;
+
+          default:
+            reader.skipType(tag & 7);
+            break;
+        }
+      }
+
+      return message;
+    }
+
+    owner: Uint8Array | null;
+
+    constructor(owner: Uint8Array | null = null) {
+      this.owner = owner;
+    }
+  }
+
+  export class list_args {
+    static encode(message: list_args, writer: Writer): void {
+      const unique_name_start = message.start;
+      if (unique_name_start !== null) {
+        writer.uint32(10);
+        writer.bytes(unique_name_start);
+      }
+
+      if (message.limit != 0) {
+        writer.uint32(16);
+        writer.int32(message.limit);
+      }
+
+      if (message.direction != 0) {
+        writer.uint32(24);
+        writer.int32(message.direction);
+      }
+    }
+
+    static decode(reader: Reader, length: i32): list_args {
+      const end: usize = length < 0 ? reader.end : reader.ptr + length;
+      const message = new list_args();
+
+      while (reader.ptr < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            message.start = reader.bytes();
+            break;
+
+          case 2:
+            message.limit = reader.int32();
+            break;
+
+          case 3:
+            message.direction = reader.int32();
+            break;
+
+          default:
+            reader.skipType(tag & 7);
+            break;
+        }
+      }
+
+      return message;
+    }
+
+    start: Uint8Array | null;
+    limit: i32;
+    direction: direction;
+
+    constructor(
+      start: Uint8Array | null = null,
+      limit: i32 = 0,
+      direction: direction = 0
+    ) {
+      this.start = start;
+      this.limit = limit;
+      this.direction = direction;
+    }
+  }
+
+  export class addresses {
+    static encode(message: addresses, writer: Writer): void {
+      const unique_name_accounts = message.accounts;
+      if (unique_name_accounts.length !== 0) {
+        for (let i = 0; i < unique_name_accounts.length; ++i) {
+          writer.uint32(10);
+          writer.bytes(unique_name_accounts[i]);
+        }
+      }
+    }
+
+    static decode(reader: Reader, length: i32): addresses {
+      const end: usize = length < 0 ? reader.end : reader.ptr + length;
+      const message = new addresses();
+
+      while (reader.ptr < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            message.accounts.push(reader.bytes());
+            break;
+
+          default:
+            reader.skipType(tag & 7);
+            break;
+        }
+      }
+
+      return message;
+    }
+
+    accounts: Array<Uint8Array>;
+
+    constructor(accounts: Array<Uint8Array> = []) {
+      this.accounts = accounts;
+    }
+  }
+
+  export class ks_deposit_args {
+    static encode(message: ks_deposit_args, writer: Writer): void {
       const unique_name_account = message.account;
       if (unique_name_account !== null) {
         writer.uint32(10);
@@ -208,9 +346,9 @@ export namespace empty {
       }
     }
 
-    static decode(reader: Reader, length: i32): deposit_args {
+    static decode(reader: Reader, length: i32): ks_deposit_args {
       const end: usize = length < 0 ? reader.end : reader.ptr + length;
-      const message = new deposit_args();
+      const message = new ks_deposit_args();
 
       while (reader.ptr < end) {
         const tag = reader.uint32();
@@ -265,8 +403,8 @@ export namespace empty {
     }
   }
 
-  export class withdraw_args {
-    static encode(message: withdraw_args, writer: Writer): void {
+  export class ks_withdraw_args {
+    static encode(message: ks_withdraw_args, writer: Writer): void {
       const unique_name_account = message.account;
       if (unique_name_account !== null) {
         writer.uint32(10);
@@ -284,9 +422,9 @@ export namespace empty {
       }
     }
 
-    static decode(reader: Reader, length: i32): withdraw_args {
+    static decode(reader: Reader, length: i32): ks_withdraw_args {
       const end: usize = length < 0 ? reader.end : reader.ptr + length;
-      const message = new withdraw_args();
+      const message = new ks_withdraw_args();
 
       while (reader.ptr < end) {
         const tag = reader.uint32();
@@ -472,9 +610,14 @@ export namespace empty {
     }
   }
 
-  @unmanaged
   export class ratio_args {
-    static encode(message: ratio_args, writer: Writer): void {}
+    static encode(message: ratio_args, writer: Writer): void {
+      const unique_name_account = message.account;
+      if (unique_name_account !== null) {
+        writer.uint32(10);
+        writer.bytes(unique_name_account);
+      }
+    }
 
     static decode(reader: Reader, length: i32): ratio_args {
       const end: usize = length < 0 ? reader.end : reader.ptr + length;
@@ -483,6 +626,10 @@ export namespace empty {
       while (reader.ptr < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
+          case 1:
+            message.account = reader.bytes();
+            break;
+
           default:
             reader.skipType(tag & 7);
             break;
@@ -492,7 +639,11 @@ export namespace empty {
       return message;
     }
 
-    constructor() {}
+    account: Uint8Array | null;
+
+    constructor(account: Uint8Array | null = null) {
+      this.account = account;
+    }
   }
 
   export class ratio_result {
@@ -567,5 +718,10 @@ export namespace empty {
       this.token_b = token_b;
       this.block_time = block_time;
     }
+  }
+
+  export enum direction {
+    ascending = 0,
+    descending = 1,
   }
 }

@@ -12,9 +12,10 @@ export class ExternalContract extends Btoken {
     this._contractId = contractId;
   }
 
-  ratio(): empty.ratio_result {
-    const args = new empty.ratio_args();
-    const callRes = System.call(this._contractId, 0x6d0c5abf, Protobuf.encode(args, empty.ratio_args.encode));
+  // ratio ()
+  ratio(args: empty.ratio_args): empty.ratio_result {
+    // const args = new empty.ratio_args();
+    const callRes = System.call(this._contractId, 0x1caba674, Protobuf.encode(args, empty.ratio_args.encode)); // adjust entrypoint
     System.require(callRes.code == 0, "failed to retrieve 1");
     const res = Protobuf.decode<empty.ratio_result>(callRes.res.object as Uint8Array, empty.ratio_result.decode);
     return res;

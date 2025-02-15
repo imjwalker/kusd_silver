@@ -12,18 +12,37 @@ message uint64 {
    uint64 value = 1;
 }
 
-message get_vault_args {
-   bytes owner = 1 [(koinos.btype) = ADDRESS];
+message ks_protocol_balances {
+   repeated ks_vaultbalances kvb = 1;
 }
 
-message vaultbalances {
+message ks_vaultbalances {
    uint64 eth = 1 [jstype = JS_STRING];
    uint64 btc = 2 [jstype = JS_STRING];
    uint64 kas = 3 [jstype = JS_STRING];
    uint64 kusdsilver = 4 [jstype = JS_STRING];
 }
 
-message deposit_args {
+message ks_get_vault_args {
+   bytes owner = 1 [(koinos.btype) = ADDRESS];
+}
+
+message list_args {
+   bytes start = 1 [(koinos.btype) = ADDRESS];
+   int32 limit = 2;
+   direction direction = 3;
+}
+
+message addresses {
+   repeated bytes accounts = 1 [(koinos.btype) = ADDRESS];
+}
+
+enum direction {
+   ascending = 0;
+   descending = 1;
+}
+
+message ks_deposit_args {
    bytes account = 1 [(koinos.btype) = ADDRESS];
    uint32 collateral = 2;
    uint64 amount = 3 [jstype = JS_STRING];
@@ -31,7 +50,7 @@ message deposit_args {
    bytes fee_address = 5 [(koinos.btype) = ADDRESS];
 }
 
-message withdraw_args {
+message ks_withdraw_args {
    bytes account = 1 [(koinos.btype) = ADDRESS];
    uint32 collateral = 2;
    uint64 amount = 3 [jstype = JS_STRING];
@@ -55,7 +74,7 @@ message liquidate_args {
 
 
 message ratio_args {
-   
+   bytes account = 1 [(koinos.btype) = ADDRESS];
 }
 
 message ratio_result {
