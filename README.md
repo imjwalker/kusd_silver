@@ -20,4 +20,4 @@ ETH, BTC, and KAS are wrapped, non-native tokens, which technically makes them m
 
 ### Fees
 
-People can interact directly with the contract for free. They can also use a frontend that charges a percentage fee on deposits. Withdrawing collateral, minting KUSD, and repaying it is always free.
+The frontend charges a one-time 0.3% fee on deposits. Withdrawing collateral, minting KUSD and repaying loans is always free and can be done as often as the user wants.
