@@ -13,9 +13,9 @@ const VAULTS_SPACE_ID = 5;
 
 // TESTNET CONTRACTS
 // Random token contracts (placeholders). Freely mint tokens (in range of uint64) 
-const ethContract = new Base(Base58.decode("17mY5nkRwW4cpruxmavBaTMfiV3PUC8mG7")); // Stable test
-const btcContract = new Base(Base58.decode("1PMyipr6DmecFezR3Z6wLheNznK76yuSat")); // third stable
-const kasContract = new Base(Base58.decode("1Nu8U85SLvLHimTYLGVH2Qha5uoDuWm6mm")); // fourth stable
+const ethContract = new Base(Base58.decode("17mY5nkRwW4cpruxmavBaTMfiV3PUC8mG7"));
+const btcContract = new Base(Base58.decode("1PMyipr6DmecFezR3Z6wLheNznK76yuSat"));
+const kasContract = new Base(Base58.decode("1Nu8U85SLvLHimTYLGVH2Qha5uoDuWm6mm"));
 
 // KoinDX pool contracts
 const ethUsdt = new Extc(Base58.decode("15EDfz9ZdepDSV1ERoe8LXN9dvT7X7qMk1"));
@@ -97,8 +97,10 @@ export class KusdSilver extends Token {
     let fee_amount: u64 = 0;
 
     // Sending a Fee is optional
-    // Fee has 3 decimal places, minimum fee is 0.001 (0.1 %) if true
-    if (args.fee > 0) {
+    // Fee has 3 decimal places, minimum fee is 0.001 (0.1 %) if true and maximum is 0.5%
+    if (args.fee > 5) {
+      throw new Error("Fee is set too high");
+    } else if (args.fee > 0) {
       fee_amount = multiplyAndDivide(args.amount, args.fee, 1000);
       toDeposit = args.amount - fee_amount;
     } else {
@@ -208,6 +210,8 @@ export class KusdSilver extends Token {
    * @readonly
    */
   ks_usd(args: empty.ks_vaultbalances): empty.uint64 {
+
+    // TODO: replace with Chainlink price feed oracle
 
     let totalCollateralValue: u64 = 10;
     // Testnet workaround using dummy price objects, on mainnet the KOINDX pool contracts will be called instead

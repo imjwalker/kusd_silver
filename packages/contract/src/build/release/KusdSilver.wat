@@ -442,7 +442,7 @@
    local.get $1
    global.set $~lib/rt/itcms/iter
   end
-  block $__inlined_func$~lib/rt/itcms/Object#unlink$2141
+  block $__inlined_func$~lib/rt/itcms/Object#unlink$2142
    local.get $0
    i32.load offset=4
    i32.const -4
@@ -461,7 +461,7 @@
     if
      unreachable
     end
-    br $__inlined_func$~lib/rt/itcms/Object#unlink$2141
+    br $__inlined_func$~lib/rt/itcms/Object#unlink$2142
    end
    local.get $0
    i32.load offset=8
@@ -6936,7 +6936,7 @@
      global.get $~lib/memory/__stack_pointer
      local.get $0
      i32.store
-     block $__inlined_func$~lib/string/String#charCodeAt$2152
+     block $__inlined_func$~lib/string/String#charCodeAt$2153
       local.get $8
       local.get $0
       i32.const 20
@@ -6952,7 +6952,7 @@
        global.set $~lib/memory/__stack_pointer
        i32.const -1
        local.set $2
-       br $__inlined_func$~lib/string/String#charCodeAt$2152
+       br $__inlined_func$~lib/string/String#charCodeAt$2153
       end
       local.get $0
       local.get $8
@@ -9063,7 +9063,7 @@
     global.get $~lib/memory/__stack_pointer
     i64.const 0
     i64.store
-    block $__inlined_func$~lib/@koinos/sdk-as/assembly/util/stringBytes/StringBytes.bytesToString$2004
+    block $__inlined_func$~lib/@koinos/sdk-as/assembly/util/stringBytes/StringBytes.bytesToString$2005
      local.get $1
      i32.eqz
      if
@@ -9073,7 +9073,7 @@
       global.set $~lib/memory/__stack_pointer
       i32.const 1232
       local.set $0
-      br $__inlined_func$~lib/@koinos/sdk-as/assembly/util/stringBytes/StringBytes.bytesToString$2004
+      br $__inlined_func$~lib/@koinos/sdk-as/assembly/util/stringBytes/StringBytes.bytesToString$2005
      end
      global.get $~lib/memory/__stack_pointer
      local.get $1
@@ -21098,35 +21098,46 @@
   i32.store
   local.get $1
   i32.load offset=16
+  i32.const 5
+  i32.gt_u
   if (result i64)
-   global.get $~lib/memory/__stack_pointer
-   local.get $1
-   i32.store
-   local.get $1
-   i64.load offset=8
-   local.set $2
-   global.get $~lib/memory/__stack_pointer
-   local.get $1
-   i32.store
-   local.get $2
-   local.get $1
-   i64.load32_u offset=16
-   i64.const 1000
-   call $~lib/@koinosbox/contracts/assembly/vapor/utils/multiplyAndDivide
-   local.set $2
-   global.get $~lib/memory/__stack_pointer
-   local.get $1
-   i32.store
-   local.get $1
-   i64.load offset=8
-   local.get $2
-   i64.sub
+   unreachable
   else
    global.get $~lib/memory/__stack_pointer
    local.get $1
    i32.store
    local.get $1
-   i64.load offset=8
+   i32.load offset=16
+   if (result i64)
+    global.get $~lib/memory/__stack_pointer
+    local.get $1
+    i32.store
+    local.get $1
+    i64.load offset=8
+    local.set $2
+    global.get $~lib/memory/__stack_pointer
+    local.get $1
+    i32.store
+    local.get $2
+    local.get $1
+    i64.load32_u offset=16
+    i64.const 1000
+    call $~lib/@koinosbox/contracts/assembly/vapor/utils/multiplyAndDivide
+    local.set $2
+    global.get $~lib/memory/__stack_pointer
+    local.get $1
+    i32.store
+    local.get $1
+    i64.load offset=8
+    local.get $2
+    i64.sub
+   else
+    global.get $~lib/memory/__stack_pointer
+    local.get $1
+    i32.store
+    local.get $1
+    i64.load offset=8
+   end
   end
   local.set $3
   block $break|0
@@ -26609,7 +26620,7 @@
       local.tee $2
       i32.store offset=8
      end
-     block $"__inlined_func$~lib/@koinos/sdk-as/assembly/systemCalls/System.getPrevObject<~lib/typedarray/Uint8Array,~lib/@koinosbox/contracts/assembly/token/proto/token/token.uint64>$2098"
+     block $"__inlined_func$~lib/@koinos/sdk-as/assembly/systemCalls/System.getPrevObject<~lib/typedarray/Uint8Array,~lib/@koinosbox/contracts/assembly/token/proto/token/token.uint64>$2099"
       local.get $2
       i32.eqz
       if
@@ -26619,7 +26630,7 @@
        global.set $~lib/memory/__stack_pointer
        i32.const 0
        local.set $2
-       br $"__inlined_func$~lib/@koinos/sdk-as/assembly/systemCalls/System.getPrevObject<~lib/typedarray/Uint8Array,~lib/@koinosbox/contracts/assembly/token/proto/token/token.uint64>$2098"
+       br $"__inlined_func$~lib/@koinos/sdk-as/assembly/systemCalls/System.getPrevObject<~lib/typedarray/Uint8Array,~lib/@koinosbox/contracts/assembly/token/proto/token/token.uint64>$2099"
       end
       global.get $~lib/memory/__stack_pointer
       local.get $2
@@ -28941,7 +28952,7 @@
              global.get $~lib/memory/__stack_pointer
              local.get $0
              i32.store offset=8
-             block $__inlined_func$~lib/as-proto/assembly/Reader/Reader#sint32@override$2168
+             block $__inlined_func$~lib/as-proto/assembly/Reader/Reader#sint32@override$2169
               local.get $0
               i32.const 8
               i32.sub
@@ -28982,7 +28993,7 @@
                i32.shr_u
                i32.xor
                local.set $2
-               br $__inlined_func$~lib/as-proto/assembly/Reader/Reader#sint32@override$2168
+               br $__inlined_func$~lib/as-proto/assembly/Reader/Reader#sint32@override$2169
               end
               unreachable
              end
@@ -28997,7 +29008,7 @@
             global.get $~lib/memory/__stack_pointer
             local.get $0
             i32.store offset=8
-            block $__inlined_func$~lib/as-proto/assembly/Reader/Reader#sint64@override$2169
+            block $__inlined_func$~lib/as-proto/assembly/Reader/Reader#sint64@override$2170
              local.get $0
              i32.const 8
              i32.sub
@@ -29038,7 +29049,7 @@
               i64.shr_u
               i64.xor
               local.set $3
-              br $__inlined_func$~lib/as-proto/assembly/Reader/Reader#sint64@override$2169
+              br $__inlined_func$~lib/as-proto/assembly/Reader/Reader#sint64@override$2170
              end
              unreachable
             end
@@ -29053,7 +29064,7 @@
            global.get $~lib/memory/__stack_pointer
            local.get $0
            i32.store offset=8
-           block $__inlined_func$~lib/as-proto/assembly/Reader/Reader#fixed32@override$2170
+           block $__inlined_func$~lib/as-proto/assembly/Reader/Reader#fixed32@override$2171
             local.get $0
             i32.const 8
             i32.sub
@@ -29121,7 +29132,7 @@
              i32.const 12
              i32.add
              global.set $~lib/memory/__stack_pointer
-             br $__inlined_func$~lib/as-proto/assembly/Reader/Reader#fixed32@override$2170
+             br $__inlined_func$~lib/as-proto/assembly/Reader/Reader#fixed32@override$2171
             end
             unreachable
            end
@@ -29136,7 +29147,7 @@
           global.get $~lib/memory/__stack_pointer
           local.get $0
           i32.store offset=8
-          block $__inlined_func$~lib/as-proto/assembly/Reader/Reader#fixed64@override$2171
+          block $__inlined_func$~lib/as-proto/assembly/Reader/Reader#fixed64@override$2172
            local.get $0
            i32.const 8
            i32.sub
@@ -29204,7 +29215,7 @@
             i32.const 12
             i32.add
             global.set $~lib/memory/__stack_pointer
-            br $__inlined_func$~lib/as-proto/assembly/Reader/Reader#fixed64@override$2171
+            br $__inlined_func$~lib/as-proto/assembly/Reader/Reader#fixed64@override$2172
            end
            unreachable
           end
@@ -29219,7 +29230,7 @@
          global.get $~lib/memory/__stack_pointer
          local.get $0
          i32.store offset=8
-         block $__inlined_func$~lib/as-proto/assembly/Reader/Reader#sfixed32@override$2172
+         block $__inlined_func$~lib/as-proto/assembly/Reader/Reader#sfixed32@override$2173
           local.get $0
           i32.const 8
           i32.sub
@@ -29290,7 +29301,7 @@
            i32.const 16
            i32.add
            global.set $~lib/memory/__stack_pointer
-           br $__inlined_func$~lib/as-proto/assembly/Reader/Reader#sfixed32@override$2172
+           br $__inlined_func$~lib/as-proto/assembly/Reader/Reader#sfixed32@override$2173
           end
           unreachable
          end
@@ -29305,7 +29316,7 @@
         global.get $~lib/memory/__stack_pointer
         local.get $0
         i32.store offset=8
-        block $__inlined_func$~lib/as-proto/assembly/Reader/Reader#sfixed64@override$2173
+        block $__inlined_func$~lib/as-proto/assembly/Reader/Reader#sfixed64@override$2174
          local.get $0
          i32.const 8
          i32.sub
@@ -29376,7 +29387,7 @@
           i32.const 16
           i32.add
           global.set $~lib/memory/__stack_pointer
-          br $__inlined_func$~lib/as-proto/assembly/Reader/Reader#sfixed64@override$2173
+          br $__inlined_func$~lib/as-proto/assembly/Reader/Reader#sfixed64@override$2174
          end
          unreachable
         end
