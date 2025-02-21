@@ -1,4 +1,3 @@
-
 import { Protobuf } from "as-proto";
 import { System, Token as Btoken } from "@koinos/sdk-as";
 import { empty } from "./proto/empty";
@@ -12,12 +11,11 @@ export class ExternalContract extends Btoken {
     this._contractId = contractId;
   }
 
-  // ratio ()
-  ratio(args: empty.ratio_args): empty.ratio_result {
-    // const args = new empty.ratio_args();
-    const callRes = System.call(this._contractId, 0x1caba674, Protobuf.encode(args, empty.ratio_args.encode)); // adjust entrypoint
+  get_price(args: empty.get_price_args): empty.price_object {
+    const callRes = System.call(this._contractId, 0x8d26b6d6, Protobuf.encode(args, empty.get_price_args.encode));
     System.require(callRes.code == 0, "failed to retrieve 1");
-    const res = Protobuf.decode<empty.ratio_result>(callRes.res.object as Uint8Array, empty.ratio_result.decode);
+    const res = Protobuf.decode<empty.price_object>(callRes.res.object as Uint8Array, empty.price_object.decode);
     return res;
   }
 }
+
